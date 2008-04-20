@@ -1,0 +1,909 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JetBrains.ReSharper.PowerToys.NSpecify</name>
+    </assembly>
+    <members>
+        <member name="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider">
+            <summary>
+            The NSpecify unit spec provider
+            </summary>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.ExploreAssembly(JetBrains.Metadata.Reader.API.IMetadataAssembly,JetBrains.ProjectModel.IProject,JetBrains.ReSharper.UnitTestExplorer.UnitTestElementConsumer)">
+            <summary>
+            Explores given compiled project
+            </summary>
+            <param name="assembly"></param>
+            <param name="project"></param>
+            <param name="consumer"></param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.GetTaskSequence(JetBrains.ReSharper.UnitTestExplorer.UnitTestElement,System.Collections.Generic.IList{JetBrains.ReSharper.UnitTestExplorer.UnitTestElement})">
+            <summary>
+            Gets task information for <see cref="T:JetBrains.ReSharper.TaskRunnerFramework.RemoteTaskRunner"/> from element
+            </summary>
+            <param name="element"></param>
+            <param name="explicitElements"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.ExploreFile(JetBrains.ReSharper.Psi.Tree.IFile,JetBrains.ReSharper.UnitTestExplorer.UnitTestElementLocationConsumer,JetBrains.Application.CheckForInterrupt)">
+            <summary>
+            Explores given PSI file
+            </summary>
+            <param name="psiFile"></param>
+            <param name="consumer"></param>
+            <param name="interrupted"></param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.IsUnitTestElement(JetBrains.ReSharper.Psi.IDeclaredElement)">
+            <summary>
+            Checks if given declared element is UnitTestElement
+            </summary>
+            <param name="element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.ExploreSolution(JetBrains.ProjectModel.ISolution,JetBrains.ReSharper.UnitTestExplorer.UnitTestElementConsumer)">
+            <summary>
+            Explores given solution, but not containing projects
+            </summary>
+            <param name="solution"></param>
+            <param name="consumer"></param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.ExploreExternal(JetBrains.ReSharper.UnitTestExplorer.UnitTestElementConsumer)">
+            <summary>
+            Explores the "world", i.e. retrieves specs not associated with current solution
+            </summary>
+            <param name="consumer"></param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.Present(JetBrains.ReSharper.UnitTestExplorer.UnitTestElement,JetBrains.CommonControls.IPresentableItem,JetBrains.TreeModels.TreeModelNode,JetBrains.UI.TreeView.PresentationState)">
+            <summary>
+            Presents the specified element.
+            </summary>
+            <param name="element">The element.</param>
+            <param name="presentableItem">The presentable item.</param>
+            <param name="node">The node.</param>
+            <param name="state">The state.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.GetTaskRunnerInfo">
+            <summary>
+            Gets instance of <see cref="T:JetBrains.ReSharper.TaskRunnerFramework.RemoteTaskRunnerInfo"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.Serialize(JetBrains.ReSharper.UnitTestExplorer.UnitTestElement)">
+            <summary>
+            Serializes element for persistence
+            </summary>
+            <param name="element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.Deserialize(JetBrains.ProjectModel.ISolution,System.String)">
+            <summary>
+            Deserializes element from persisted string
+            </summary>
+            <param name="solution"></param>
+            <param name="elementString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.CompareUnitTestElements(JetBrains.ReSharper.UnitTestExplorer.UnitTestElement,JetBrains.ReSharper.UnitTestExplorer.UnitTestElement)">
+            <summary>
+            Compares the unit spec elements.
+            </summary>
+            <param name="x">The x.</param>
+            <param name="y">The y.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.ProfferConfiguration(JetBrains.ReSharper.TaskRunnerFramework.TaskExecutorConfiguration,JetBrains.ReSharper.UnitTestExplorer.UnitTestSession)">
+            <summary>
+            Proffers the configuration.
+            </summary>
+            <param name="configuration">The configuration.</param>
+            <param name="session">The session.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.GetAllSpecificationMethods(JetBrains.Metadata.Reader.API.IMetadataTypeInfo)">
+            <summary>
+            Gets all spec methods.
+            </summary>
+            <param name="typeInfo">The type info.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.GetAttributeName(JetBrains.Metadata.Reader.API.IMetadataCustomAttribute)">
+            <summary>
+            Gets the name of the attribute.
+            </summary>
+            <param name="attribute">The attribute.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.GetExplicitString(JetBrains.Metadata.Reader.API.IMetadataEntity)">
+            <summary>
+            Gets the explicit string.
+            </summary>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.HasSpecificationFixtureAttribute(JetBrains.Metadata.Reader.API.IMetadataTypeInfo)">
+            <summary>
+            Determines whether [has spec fixture attribute] [the specified type info].
+            </summary>
+            <param name="typeInfo">The type info.</param>
+            <returns>
+            	<c>true</c> if [has spec fixture attribute] [the specified type info]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.IsSpecificationFixture(JetBrains.ReSharper.Psi.ITypeElement)">
+            <summary>
+            Determines whether [is spec fixture] [the specified type element].
+            </summary>
+            <param name="typeElement">The type element.</param>
+            <returns>
+            	<c>true</c> if [is spec fixture] [the specified type element]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.IsSpecificationFixture(JetBrains.Metadata.Reader.API.IMetadataTypeInfo)">
+            <summary>
+            Determines whether [is spec fixture] [the specified type info].
+            </summary>
+            <param name="typeInfo">The type info.</param>
+            <returns>
+            	<c>true</c> if [is spec fixture] [the specified type info]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.IsSpecificationMethod(JetBrains.ReSharper.Psi.ITypeMember)">
+            <summary>
+            Determines whether [is spec method] [the specified element].
+            </summary>
+            <param name="element">The element.</param>
+            <returns>
+            	<c>true</c> if [is spec method] [the specified element]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.IsSpecificationMethod(JetBrains.Metadata.Reader.API.IMetadataMethod)">
+            <summary>
+            Determines whether [is spec method] [the specified method].
+            </summary>
+            <param name="method">The method.</param>
+            <returns>
+            	<c>true</c> if [is spec method] [the specified method]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.ID">
+            <summary>
+            ID of provider
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.MyFileExplorer">
+            <summary>
+            My file explorer
+            </summary>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.MyFileExplorer.#ctor(JetBrains.ReSharper.UnitTestExplorer.IUnitTestProvider,JetBrains.ReSharper.UnitTestExplorer.UnitTestElementLocationConsumer,JetBrains.ReSharper.Psi.Tree.IFile,JetBrains.Application.CheckForInterrupt)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.MyFileExplorer"/> class.
+            </summary>
+            <param name="provider">The provider.</param>
+            <param name="consumer">The consumer.</param>
+            <param name="file">The file.</param>
+            <param name="interrupted">The interrupted.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.MyFileExplorer.AppendSpecs(JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureElement,System.Collections.Generic.IEnumerable{JetBrains.ReSharper.Psi.IDeclaredType},System.Int32@)">
+            <summary>
+            Appends the specs.
+            </summary>
+            <param name="fixtureElement">The fixture element.</param>
+            <param name="types">The types.</param>
+            <param name="order">The order.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.MyFileExplorer.InteriorShouldBeProcessed(JetBrains.ReSharper.Psi.Tree.IElement)">
+            <summary>
+            Interior should be processed.
+            </summary>
+            <param name="element">The element.</param>
+            <returns>
+            	<c>true</c> if the element interior should be processed; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.MyFileExplorer.ProcessBeforeInterior(JetBrains.ReSharper.Psi.Tree.IElement)">
+            <summary>
+            Processes the before interior.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.MyFileExplorer.ProcessAfterInterior(JetBrains.ReSharper.Psi.Tree.IElement)">
+            <summary>
+            Processes the after interior.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestProvider.MyFileExplorer.ProcessingIsFinished">
+            <summary>
+            Gets a value indicating whether [processing is finished].
+            </summary>
+            <value>
+            	<c>true</c> if [processing is finished]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.CannotCreateInstanceMessage">
+            <summary>
+              Looks up a localized string similar to Cannot create instance of type &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.CannotFindSpecMethodExceptionMessage">
+            <summary>
+              Looks up a localized string similar to Cannot find specification  method &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.CannotLoadAssemblyFromFileMessage">
+            <summary>
+              Looks up a localized string similar to Cannot load assembly from {0}: file not exists.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.CannotLoadAssemblyMessage">
+            <summary>
+              Looks up a localized string similar to Cannot load assembly from {0}.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.CannotLoadAssemblyNotAssemblyMessage">
+            <summary>
+              Looks up a localized string similar to Cannot load assembly from {0}: not an assembly.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.CreatingResourceMessage">
+            <summary>
+              Looks up a localized string similar to Creating resources....
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.ExpectedExceptionNotThrownMessage">
+            <summary>
+              Looks up a localized string similar to Expected exception &apos;{0}&apos; was not thrown.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.FullNameFormattedString">
+            <summary>
+              Looks up a localized string similar to {0}.{1}.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.HasMultipleFixtureSetupMethodsMessage">
+            <summary>
+              Looks up a localized string similar to  has multiple fixture setup methods.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.HasMultipleFixtureTeardownMethodsMessage">
+            <summary>
+              Looks up a localized string similar to  has multiple fixture teardown methods.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.HasMultipleSpecificationSetupMethodsMessage">
+            <summary>
+              Looks up a localized string similar to  has multiple specification setup methods.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.HasMultipleSpecificationTeardownMethodsMessage">
+            <summary>
+              Looks up a localized string similar to  has multiple specification teardown methods.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.InstantiatingMessage">
+            <summary>
+              Looks up a localized string similar to Instantiating....
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.InvalidApartmentStateSettingExceptionMessage">
+            <summary>
+              Looks up a localized string similar to Invalid ApartmentState setting &apos;{1}&apos; in configuration file &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.InvalidThreadPriorityExceptionMessage">
+            <summary>
+              Looks up a localized string similar to Invalid ThreadPriority setting &apos;{1}&apos; in &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.NotNSpecifyElementExceptionMessage">
+            <summary>
+              Looks up a localized string similar to element is not NSpecify Element: &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.ParameterlessConstructorMissingMessage">
+            <summary>
+              Looks up a localized string similar to Cannot find parameterless constructor on type &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.ReleaseResourcesMessage">
+            <summary>
+              Looks up a localized string similar to Releasing resources....
+            </summary>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.Resources.NSpecify.ShortNameFormattedString">
+            <summary>
+              Looks up a localized string similar to {0}.
+            </summary>
+        </member>
+        <member name="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitElementBase">
+            <summary>
+            The NSpecify unit element base
+            </summary>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitElementBase.#ctor(JetBrains.ReSharper.UnitTestExplorer.IUnitTestProvider,JetBrains.ReSharper.UnitTestExplorer.UnitTestElement,JetBrains.ProjectModel.IProjectModelElement,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitElementBase"/> class.
+            </summary>
+            <param name="provider">The provider.</param>
+            <param name="parent">The parent.</param>
+            <param name="project">The project.</param>
+            <param name="typeName">Name of the type.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitElementBase.Equals(System.Object)">
+            <summary>
+            Equalses the specified obj.
+            </summary>
+            <param name="obj">The obj.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitElementBase.GetDisposition">
+            <summary>
+            Gets the disposition.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitElementBase.GetHashCode">
+            <summary>
+            Gets the hash code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitElementBase.GetNamespace">
+            <summary>
+            Gets the namespace.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitElementBase.GetProject">
+            <summary>
+            Gets the project.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitElementBase.GetProjectFiles">
+            <summary>
+            Gets the project items.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitElementBase.GetTypeClrName">
+            <summary>
+            Gets the name of the type CLR.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitElementBase.GetDeclaredType">
+            <summary>
+            Gets the type of the declared.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask">
+            <summary>
+            The NSpecify unit functionality fixture task
+            </summary>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask"/> class.
+            </summary>
+            <param name="assemblyLocation">The assembly location.</param>
+            <param name="typeName">Name of the type.</param>
+            <param name="explicitly">if set to <c>true</c> [explicitly].</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask.#ctor(System.Xml.XmlElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask"/> class.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask.Equals(System.Object)">
+            <summary>
+            Equalses the specified obj.
+            </summary>
+            <param name="obj">The obj.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask.GetHashCode">
+            <summary>
+            Gets the hash code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask.SaveXml(System.Xml.XmlElement)">
+            <summary>
+            Saves the XML.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask.Equals(JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask)">
+            <summary>
+            Equalses the specified NSpecify unit spec fixture task.
+            </summary>
+            <param name="nSpecifyUnitSpecFixtureTask">The n specify unit spec fixture task.</param>
+            <returns></returns>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask.AssemblyLocation">
+            <summary>
+            Gets the assembly location.
+            </summary>
+            <value>The assembly location.</value>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask.Explicitly">
+            <summary>
+            Gets a value indicating whether this <see cref="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask"/> is explicitly.
+            </summary>
+            <value><c>true</c> if explicitly; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask.Instance">
+            <summary>
+            Gets or sets the instance.
+            </summary>
+            <value>The instance.</value>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask.TypeName">
+            <summary>
+            Gets the name of the type.
+            </summary>
+            <value>The name of the type.</value>
+        </member>
+        <member name="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestElement">
+            <summary>
+            The NSpecify unit specification element
+            </summary>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestElement.#ctor(JetBrains.ReSharper.UnitTestExplorer.IUnitTestProvider,JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureElement,JetBrains.ProjectModel.IProjectModelElement,System.String,System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestElement"/> class.
+            </summary>
+            <param name="provider">The provider.</param>
+            <param name="fixture">The fixture.</param>
+            <param name="project">The project.</param>
+            <param name="declaringTypeName">Name of the declaring type.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="order">The order.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestElement.Equals(System.Object)">
+            <summary>
+            Equalses the specified obj.
+            </summary>
+            <param name="obj">The obj.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestElement.GetDeclaredElement">
+            <summary>
+            Gets the declared element.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestElement.GetHashCode">
+            <summary>
+            Gets the hash code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestElement.GetKind">
+            <summary>
+            Gets the kind.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestElement.GetTitle">
+            <summary>
+            Gets the title.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestElement.Matches(System.String)">
+            <summary>
+            Matcheses the specified filter.
+            </summary>
+            <param name="filter">The filter.</param>
+            <returns></returns>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestElement.Fixture">
+            <summary>
+            Gets the fixture.
+            </summary>
+            <value>The fixture.</value>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestElement.MethodName">
+            <summary>
+            Gets the name of the method.
+            </summary>
+            <value>The name of the method.</value>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestElement.Order">
+            <summary>
+            Gets the order.
+            </summary>
+            <value>The order.</value>
+        </member>
+        <member name="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestPresenter">
+            <summary>
+            The NSpecify unit spec presenter
+            </summary>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestPresenter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestPresenter"/> class.
+            </summary>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestPresenter.PresentTest(JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestElement,JetBrains.CommonControls.IPresentableItem,JetBrains.TreeModels.TreeModelNode,JetBrains.UI.TreeView.PresentationState)">
+            <summary>
+            Presents the spec.
+            </summary>
+            <param name="value">The value.</param>
+            <param name="item">The item.</param>
+            <param name="modelNode">The model node.</param>
+            <param name="state">The state.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestPresenter.PresentTestFixture(JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureElement,JetBrains.CommonControls.IPresentableItem,JetBrains.TreeModels.TreeModelNode,JetBrains.UI.TreeView.PresentationState)">
+            <summary>
+            Presents the spec fixture.
+            </summary>
+            <param name="value">The value.</param>
+            <param name="item">The item.</param>
+            <param name="modelNode">The model node.</param>
+            <param name="state">The state.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestPresenter.IsNaturalParent(System.Object,System.Object)">
+            <summary>
+            Determines whether [is natural parent] [the specified parent value].
+            </summary>
+            <param name="parentValue">The parent value.</param>
+            <param name="childValue">The child value.</param>
+            <returns>
+            	<c>true</c> if [is natural parent] [the specified parent value]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestPresenter.Unwrap(System.Object)">
+            <summary>
+            Unwraps the specified value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureElement">
+            <summary>
+            The N specify unit functionality fixture element
+            </summary>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureElement.#ctor(JetBrains.ReSharper.UnitTestExplorer.IUnitTestProvider,JetBrains.ProjectModel.IProjectModelElement,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureElement"/> class.
+            </summary>
+            <param name="provider">The provider.</param>
+            <param name="project">The project.</param>
+            <param name="typeName">Name of the type.</param>
+            <param name="assemblyLocation">The assembly location.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureElement.GetDeclaredElement">
+            <summary>
+            Gets the declared element.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureElement.GetKind">
+            <summary>
+            Gets the kind.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureElement.GetTitle">
+            <summary>
+            Gets the title.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureElement.Matches(System.String)">
+            <summary>
+            Matcheses the specified filter.
+            </summary>
+            <param name="filter">The filter.</param>
+            <returns></returns>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureElement.AssemblyLocation">
+            <summary>
+            Gets the assembly location.
+            </summary>
+            <value>The assembly location.</value>
+        </member>
+        <member name="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner">
+            <summary>
+            The NSpecify unit task runner
+            </summary>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.#ctor(JetBrains.ReSharper.TaskRunnerFramework.IRemoteTaskServer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner"/> class.
+            </summary>
+            <param name="server">The server.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.ConfigureAppDomain(JetBrains.ReSharper.TaskRunnerFramework.TaskAppDomainConfiguration)">
+            <summary>
+            Configures the app domain.
+            </summary>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.Execute(JetBrains.ReSharper.TaskRunnerFramework.TaskExecutionNode)">
+            <summary>
+            Executes the specified node.
+            </summary>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.Finish(JetBrains.ReSharper.TaskRunnerFramework.TaskExecutionNode)">
+            <summary>
+            Finishes the specified node.
+            </summary>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.Start(JetBrains.ReSharper.TaskRunnerFramework.TaskExecutionNode)">
+            <summary>
+            Starts the specified node.
+            </summary>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.Finish(JetBrains.ReSharper.TaskRunnerFramework.IRemoteTaskServer,JetBrains.ReSharper.TaskRunnerFramework.TaskExecutionNode,JetBrains.ReSharper.TaskRunnerFramework.RemoteTask)">
+            <summary>
+            Finishes the specified server.
+            </summary>
+            <param name="server">The server.</param>
+            <param name="node">The node.</param>
+            <param name="spec">The spec.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.Finish(JetBrains.ReSharper.TaskRunnerFramework.IRemoteTaskServer,JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask)">
+            <summary>
+            Finishes the specified server.
+            </summary>
+            <param name="server">The server.</param>
+            <param name="fixture">The fixture.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.Start(JetBrains.ReSharper.TaskRunnerFramework.IRemoteTaskServer,JetBrains.ReSharper.TaskRunnerFramework.TaskExecutionNode,JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestTask)">
+            <summary>
+            Starts the specified server.
+            </summary>
+            <param name="server">The server.</param>
+            <param name="node">The node.</param>
+            <param name="spec">The spec.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.Start(JetBrains.ReSharper.TaskRunnerFramework.IRemoteTaskServer,JetBrains.ReSharper.TaskRunnerFramework.TaskExecutionNode,JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask)">
+            <summary>
+            Starts the specified server.
+            </summary>
+            <param name="server">The server.</param>
+            <param name="node">The node.</param>
+            <param name="fixture">The fixture.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.GetPropertyValue(System.Object,System.String)">
+            <summary>
+            Gets the property value.
+            </summary>
+            <param name="obj">The obj.</param>
+            <param name="propName">Name of the prop.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.BuildTypeInfo(JetBrains.ReSharper.TaskRunnerFramework.IRemoteTaskServer,JetBrains.ReSharper.TaskRunnerFramework.RemoteTask,System.Type)">
+            <summary>
+            Build type info.
+            </summary>
+            <param name="server">The server.</param>
+            <param name="fixture">The fixture.</param>
+            <param name="type">The type.</param>
+            <returns>
+            	<c>true</c> if the server build type info; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.CheckSetUpTearDownSignature(System.Reflection.MethodInfo,System.String)">
+            <summary>
+            Check set up tear down signature.
+            </summary>
+            <param name="method">The method.</param>
+            <param name="attrName">Name of the attr.</param>
+            <returns>
+            	<c>true</c> if the method check set up tear down signature; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.Execute(JetBrains.ReSharper.TaskRunnerFramework.IRemoteTaskServer,JetBrains.ReSharper.TaskRunnerFramework.TaskExecutionNode,JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestTask)">
+            <summary>
+            Executes the specified server.
+            </summary>
+            <param name="server">The server.</param>
+            <param name="node">The node.</param>
+            <param name="spec">The spec.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.FilterHiddenMethods(System.Collections.Generic.IList{System.Reflection.MethodInfo})">
+            <summary>
+            Filters the hidden methods.
+            </summary>
+            <param name="methods">The methods.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.GetCustomAttributesOf(System.Reflection.ICustomAttributeProvider,System.Boolean,System.String)">
+            <summary>
+            Gets the custom attributes of.
+            </summary>
+            <param name="mi">The mi.</param>
+            <param name="inherit">if set to <c>true</c> [inherit].</param>
+            <param name="typeName">Name of the type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.GetExpectedException(System.Reflection.ICustomAttributeProvider,System.String@)">
+            <summary>
+            Gets the expected exception.
+            </summary>
+            <param name="info">The info.</param>
+            <param name="expectedExceptionType">Expected type of the exception.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.GetFixtureType(JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestFixtureTask,JetBrains.ReSharper.TaskRunnerFramework.IRemoteTaskServer)">
+            <summary>
+            Gets the type of the fixture.
+            </summary>
+            <param name="fixture">The fixture.</param>
+            <param name="server">The server.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.IsInitializeFunctionality(System.Reflection.MethodInfo)">
+            <summary>
+            Determines whether the specified method info is decorated with a initailize functionality attribute.
+            </summary>
+            <param name="info">The info.</param>
+            <returns>
+            	<c>true</c> if the specified method info is decorated with a initailize functionality attribute; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.IsCleanupFunctionality(System.Reflection.MethodInfo)">
+            <summary>
+            Determines whether the specified method info is decorated with a cleanup functionality attribute.
+            </summary>
+            <param name="info">The info.</param>
+            <returns>
+            	<c>true</c> if the specified method info is decorated with a cleanup functionality attribute; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.IsIgnored(System.Reflection.ICustomAttributeProvider,System.String@)">
+            <summary>
+            Determines whether the specified info is ignored.
+            </summary>
+            <param name="info">The info.</param>
+            <param name="reason">The reason.</param>
+            <returns>
+            	<c>true</c> if the specified info is ignored; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.IsSubtypeOf(System.Type,System.String)">
+            <summary>
+            Determines whether the specified type is a subtype of the named string.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="name">The name.</param>
+            <returns>
+            	<c>true</c> if the specified type is a subtype of the named string; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.IsSubtypeOf(System.Object,System.String)">
+            <summary>
+            Determines whether the specified obj is a subtype of the named string.
+            </summary>
+            <param name="obj">The obj.</param>
+            <param name="name">The name.</param>
+            <returns>
+            	<c>true</c> if the specified obj is a subtype of the named string; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.IsSetupResources(System.Reflection.MethodInfo)">
+            <summary>
+            Determines whether the specified method info is decorated with a setup resources attribute.
+            </summary>
+            <param name="info">The info.</param>
+            <returns>
+            	<c>true</c> if the specified method info is decorated with a setup resources attribute; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.IsDestroyResources(System.Reflection.MethodInfo)">
+            <summary>
+            Determines whether the specified method info is decorated with a destroy resources attribute.
+            </summary>
+            <param name="info">The info.</param>
+            <returns>
+            	<c>true</c> if the specified method info is decorated with a destroy resources attribute; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTaskRunner.SelectAttributes(System.Object[],System.String)">
+            <summary>
+            Selects the attributes.
+            </summary>
+            <param name="attrs">The attrs.</param>
+            <param name="typeName">Name of the type.</param>
+            <returns></returns>
+        </member>
+        <member name="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestTask">
+            <summary>
+            The NSpecify unit spec task
+            </summary>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestTask.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestTask"/> class.
+            </summary>
+            <param name="specType">Type of the spec.</param>
+            <param name="specMethod">The spec method.</param>
+            <param name="explicitly">if set to <c>true</c> [explicitly].</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestTask.#ctor(System.Xml.XmlElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestTask"/> class.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestTask.Equals(System.Object)">
+            <summary>
+            Equalses the specified obj.
+            </summary>
+            <param name="obj">The obj.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestTask.GetHashCode">
+            <summary>
+            Gets the hash code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestTask.SaveXml(System.Xml.XmlElement)">
+            <summary>
+            Saves the XML.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestTask.Equals(JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestTask)">
+            <summary>
+            Equalses the specified n specify unit spec task.
+            </summary>
+            <param name="nSpecifyUnitTestTask">The n specify unit spec task.</param>
+            <returns></returns>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestTask.Explicitly">
+            <summary>
+            Gets a value indicating whether this <see cref="T:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestTask"/> is explicitly.
+            </summary>
+            <value><c>true</c> if explicitly; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestTask.TestMethod">
+            <summary>
+            Gets the spec method.
+            </summary>
+            <value>The spec method.</value>
+        </member>
+        <member name="P:JetBrains.ReSharper.PowerToys.NSpecify.NSpecifyUnitTestTask.TestType">
+            <summary>
+            Gets the type of the spec.
+            </summary>
+            <value>The type of the spec.</value>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingDemo.Migrations", "LoggingDemo.Migrations\LoggingDemo.Migrations.csproj", "{8BDD611F-9667-43DB-9ADD-085653CC0BFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingDemo.UI", "LoggingDemo.UI\LoggingDemo.UI.csproj", "{73A88074-6DE1-4436-B53E-C20D9F3BB245}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingDemo.Specs", "LoggingDemo.Specs\LoggingDemo.Specs.csproj", "{C3C13EAB-B815-42E1-925A-FC495EAB495C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8BDD611F-9667-43DB-9ADD-085653CC0BFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BDD611F-9667-43DB-9ADD-085653CC0BFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BDD611F-9667-43DB-9ADD-085653CC0BFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BDD611F-9667-43DB-9ADD-085653CC0BFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73A88074-6DE1-4436-B53E-C20D9F3BB245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73A88074-6DE1-4436-B53E-C20D9F3BB245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73A88074-6DE1-4436-B53E-C20D9F3BB245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73A88074-6DE1-4436-B53E-C20D9F3BB245}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3C13EAB-B815-42E1-925A-FC495EAB495C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3C13EAB-B815-42E1-925A-FC495EAB495C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3C13EAB-B815-42E1-925A-FC495EAB495C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3C13EAB-B815-42E1-925A-FC495EAB495C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
