@@ -1,0 +1,341 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ninject.Framework.PresentationFoundation</name>
+    </assembly>
+    <members>
+        <member name="T:Ninject.Framework.PresentationFoundation.Infrastructure.SubscribeToActionAttribute">
+            <summary>
+            Indicates that the decorated method should receive events published to a message broker
+            channel.
+            </summary>
+        </member>
+        <member name="T:IViewActionable">
+            <summary>
+            Defines the property Action on a WPF view/presenter publisher/subscriber attribute.
+            </summary>
+        </member>
+        <member name="P:IViewActionable.Action">
+            <summary>
+            Gets the name of the channel to subscribe to.
+            </summary>
+            <value>The action.</value>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.SubscribeToActionAttribute.#ctor(System.Type,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ninject.Extensions.MessageBroker.SubscribeAttribute"/> class.
+            </summary>
+            <param name="viewType">Type of the view.</param>
+            <param name="action">The action the view broadcasts.</param>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.SubscribeToActionAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ninject.Extensions.MessageBroker.SubscribeAttribute"/> class.
+            </summary>
+            <param name="view">Type of the view.</param>
+            <param name="action">The action the view broadcasts.</param>
+        </member>
+        <member name="P:Ninject.Framework.PresentationFoundation.Infrastructure.SubscribeToActionAttribute.Action">
+            <summary>
+            Gets the name of the channel to subscribe to.
+            </summary>
+        </member>
+        <member name="P:Ninject.Framework.PresentationFoundation.Infrastructure.SubscribeToActionAttribute.View">
+            <summary>
+            Gets or sets the name of the view for this presenter action.
+            </summary>
+            <value>The view.</value>
+        </member>
+        <member name="T:Ninject.Framework.PresentationFoundation.NinjectWpfApplication">
+            <summary>
+            A <see cref="T:System.Windows.Application"/> that creates a <see cref="T:Ninject.Core.IKernel"/> for use throughout
+            the application.
+            </summary>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.NinjectWpfApplication.OnStartup(System.Windows.StartupEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Application.Startup"/> event.
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.StartupEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.NinjectWpfApplication.CreateKernel">
+            <summary>
+            Creates the kernel.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Ninject.Framework.PresentationFoundation.NinjectWpfApplication.Logger">
+            <summary>
+            Gets or sets the logger.
+            </summary>
+            <value>The logger.</value>
+        </member>
+        <member name="T:Ninject.Framework.PresentationFoundation.WpfModule">
+            <summary>
+            Adds functionality to the kernel to support wpf.
+            </summary>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.WpfModule.BeforeLoad">
+            <summary>
+            Prepares the module for being loaded. Can be used to connect component dependencies.
+            </summary>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.WpfModule.Load">
+            <summary>
+            Loads the module into the kernel.
+            </summary>
+        </member>
+        <member name="T:Ninject.Framework.PresentationFoundation.KernelContainer">
+            <summary>
+            A static container for the <see cref="T:Ninject.Framework.PresentationFoundation.NinjectWpfApplication"/>'s kernel.
+            </summary>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.KernelContainer.Inject(System.Object)">
+            <summary>
+            Injects the specified instance by using the container's kernel.
+            </summary>
+            <param name="instance">The instance to inject.</param>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.KernelContainer.WireUp(Ninject.Framework.PresentationFoundation.IView)">
+            <summary>
+            Initializes the presenter for the specified view.
+            </summary>
+            <param name="view">The view.</param>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.KernelContainer.InitializeApplicationWith(System.Windows.Application,Ninject.Core.IModule[])">
+            <summary>
+            Initializes the application with a standard kernel for the specified modules.
+            </summary>
+            <param name="application">The application.</param>
+            <param name="modules">The modules.</param>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.KernelContainer.InitializeApplicationWith(System.Windows.Application,Ninject.Core.IKernel)">
+            <summary>
+            Initializes the application with the given kernel.
+            </summary>
+            <param name="application">The application.</param>
+            <param name="kernel">The kernel.</param>
+        </member>
+        <member name="P:Ninject.Framework.PresentationFoundation.KernelContainer.Kernel">
+            <summary>
+            Gets or sets the kernel.
+            </summary>
+            <value>The kernel.</value>
+        </member>
+        <member name="T:Ninject.Framework.PresentationFoundation.Infrastructure.WpfMessageBroker">
+            <summary>
+            Slightly customized implementation of a message broker.
+            This one has support for our own publish/subscribe attributes
+            </summary>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.WpfMessageBroker.OnConnected(System.EventArgs)">
+            <summary>
+            Called when the component is connected to its environment.
+            </summary>
+            <param name="args">The event arguments.</param>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.WpfMessageBroker.OnDisconnected(System.EventArgs)">
+            <summary>
+            Called when the component is disconnected from its environment.
+            </summary>
+            <param name="args">The event arguments.</param>
+        </member>
+        <member name="T:Ninject.Framework.PresentationFoundation.Infrastructure.PresentedByAttribute">
+            <summary>
+            This attribute marks a view with it's acompanying presenter
+            </summary>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.PresentedByAttribute.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ninject.Framework.PresentationFoundation.Infrastructure.PresentedByAttribute"/> class.
+            </summary>
+            <param name="presenterType">Type of the presenter.</param>
+        </member>
+        <member name="P:Ninject.Framework.PresentationFoundation.Infrastructure.PresentedByAttribute.PresenterType">
+            <summary>
+            Gets or sets the type of the presenter.
+            </summary>
+            <value>The type of the presenter.</value>
+        </member>
+        <member name="T:Ninject.Framework.PresentationFoundation.IPresenter">
+            <summary>
+            An abstract definition of a presenter.
+            </summary>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.IPresenter.SetView(Ninject.Framework.PresentationFoundation.IView)">
+            <summary>
+            Injects the view into the presenter.
+            </summary>
+            <param name="view">The view to associate with the presenter.</param>
+        </member>
+        <member name="T:Ninject.Framework.PresentationFoundation.Infrastructure.WpfDynamicInjectorFactory">
+            <summary>
+            A helper class that uses lightweight code generation to create dynamic methods.
+            </summary>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.WpfDynamicInjectorFactory.CreateViewActionInjector(System.Reflection.MethodInfo)">
+            <summary>
+            Creates a new View action injector.
+            </summary>
+            <param name="viewAction">The method that the injector will invoke.</param>
+            <returns>A new injector for the View action.</returns>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.WpfDynamicInjectorFactory.GetViewActionInjector(System.Reflection.MethodInfo)">
+            <summary>
+            Gets an injector for the specified View action.
+            </summary>
+            <param name="viewAction">The method that the injector will invoke.</param>
+            <returns>A new injector for the View action.</returns>
+        </member>
+        <member name="T:Ninject.Framework.PresentationFoundation.PresenterBase`1">
+            <summary>
+            The baseline definition of a presenter.
+            </summary>
+            <typeparam name="TView">The type of the view that the presenter manages.</typeparam>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.PresenterBase`1.Dispose(System.Boolean)">
+            <summary>
+            Releases all resources currently held by the object.
+            </summary>
+            <param name="disposing"><see langword="True"/> if managed objects should be disposed, otherwise <see langword="false"/>.</param>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.PresenterBase`1.OnViewConnected(`0)">
+            <summary>
+            Called when a view is connected to the presenter.
+            </summary>
+            <param name="view">The view that was connected.</param>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.PresenterBase`1.OnViewDisconnected(`0)">
+            <summary>
+            Called when a view is disconnected from the presenter.
+            </summary>
+            <param name="view">The view that was disconnected.</param>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.PresenterBase`1.Ninject#Framework#PresentationFoundation#IPresenter#SetView(Ninject.Framework.PresentationFoundation.IView)">
+            <summary>
+            Injects the view into the presenter.
+            </summary>
+            <param name="view">The view to associate with the presenter.</param>
+        </member>
+        <member name="P:Ninject.Framework.PresentationFoundation.PresenterBase`1.View">
+            <summary>
+            Gets or sets the view that the presenter should manage.
+            </summary>
+        </member>
+        <member name="P:Ninject.Framework.PresentationFoundation.PresenterBase`1.Logger">
+            <summary>
+            Gets or sets the logger associated with the object.
+            </summary>
+        </member>
+        <member name="T:Ninject.Framework.PresentationFoundation.Infrastructure.DynamicViewActionInjector">
+            <summary>
+            A method injector that uses a dynamically-generated <see cref="T:Ninject.Core.Infrastructure.Invoker"/> for invocation.
+            </summary>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.DynamicViewActionInjector.#ctor(System.Reflection.MethodInfo)">
+            <summary>
+            Creates a new DynamicViewActionInjector.
+            </summary>
+            <param name="member">The method that will be injected.</param>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.DynamicViewActionInjector.Invoke(System.Object,System.Object[])">
+            <summary>
+            Calls the method associated with the injector.
+            </summary>
+            <param name="target">The instance on which to call the method.</param>
+            <param name="arguments">The arguments to pass to the method.</param>
+            <returns>The return value of the method.</returns>
+        </member>
+        <member name="T:Ninject.Framework.PresentationFoundation.IView">
+            <summary>
+            An abstract definition of a view.
+            </summary>
+        </member>
+        <member name="T:Ninject.Framework.PresentationFoundation.Infrastructure.WpfEventReflectionStrategy">
+            <summary>
+            A planning strategy that examines types via reflection to determine if there are any
+            message publications or subscriptions defined.
+            </summary>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.WpfEventReflectionStrategy.Build(Ninject.Core.Binding.IBinding,System.Type,Ninject.Core.Planning.IActivationPlan)">
+            <summary>
+            Executed to build the activation plan.
+            </summary>
+            <param name="binding">The binding that points at the type whose activation plan is being released.</param>
+            <param name="type">The type whose activation plan is being manipulated.</param>
+            <param name="plan">The activation plan that is being manipulated.</param>
+            <returns>
+            A value indicating whether to proceed or interrupt the strategy chain.
+            </returns>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.WpfEventReflectionStrategy.CreatePublicationDirective(System.String,System.Reflection.EventInfo)">
+            <summary>
+            Creates a new directive representing a message publication.
+            </summary>
+            <param name="channel">The channel to publish to.</param>
+            <param name="evt">The event to publish.</param>
+            <returns>
+            A <see cref="T:Ninject.Extensions.MessageBroker.Infrastructure.PublicationDirective"/> representing the publication.
+            </returns>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.WpfEventReflectionStrategy.CreateSubscriptionDirective(System.String,System.Reflection.MethodInfo)">
+            <summary>
+            Creates a new directive representing a message subscription.
+            </summary>
+            <param name="channel">The channel to subscribe to.</param>
+            <param name="method">The method that will receive messages from the channel.</param>
+            <returns>
+            A <see cref="T:Ninject.Extensions.MessageBroker.Infrastructure.SubscriptionDirective"/> representing the publication.
+            </returns>
+        </member>
+        <member name="T:Ninject.Framework.PresentationFoundation.Infrastructure.ExtensionMethods.IWpfActionableExtensions">
+            <summary>
+            Extension methods for naming the message channels.
+            </summary>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.ExtensionMethods.IWpfActionableExtensions.ChannelNameFor(System.Reflection.EventInfo,System.Type)">
+            <summary>
+            Channels the name for an event.
+            </summary>
+            <param name="attribute">The attribute.</param>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.ExtensionMethods.IWpfActionableExtensions.ChannelNameFor(IViewActionable,System.Type)">
+            <summary>
+            Channels the name for an attribute.
+            </summary>
+            <param name="attribute">The attribute.</param>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.ExtensionMethods.IWpfActionableExtensions.ChannelName(Ninject.Framework.PresentationFoundation.Infrastructure.SubscribeToActionAttribute)">
+            <summary>
+            Channels the name.
+            </summary>
+            <param name="attribute">The attribute.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Ninject.Framework.PresentationFoundation.Infrastructure.PublishActionAttribute">
+            <summary>
+            Indicates that the decorated event should be published into a message broker channel.
+            </summary>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.PublishActionAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ninject.Framework.PresentationFoundation.Infrastructure.PublishActionAttribute"/> class.
+            </summary>
+            <param name="action">The name of the channel to publish to.</param>
+        </member>
+        <member name="M:Ninject.Framework.PresentationFoundation.Infrastructure.PublishActionAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ninject.Framework.PresentationFoundation.Infrastructure.PublishActionAttribute"/> class.
+            </summary>
+        </member>
+        <member name="P:Ninject.Framework.PresentationFoundation.Infrastructure.PublishActionAttribute.Action">
+            <summary>
+            Gets the name of the channel to publish to.
+            </summary>
+        </member>
+    </members>
+</doc>

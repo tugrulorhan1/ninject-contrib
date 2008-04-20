@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NSpecify.Core.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:NUnit.Core.Builders.NSpecifySuiteExtensionBuilder">
+            <summary>
+            SampleSuiteExtensionBuilder knows how to build a SampleSuiteExtension
+            </summary>
+        </member>
+        <member name="T:NUnit.Core.Extensions.Addin">
+            <summary>
+            The NSpecify NUnit addin
+            </summary>
+        </member>
+        <member name="M:NUnit.Core.Extensions.Addin.Install(NUnit.Core.Extensibility.IExtensionHost)">
+            <summary>
+            Installs the specified host.
+            </summary>
+            <param name="host">The host.</param>
+            <returns></returns>
+        </member>
+        <member name="T:NUnit.Core.Extensions.Constants">
+            <summary>
+            The constants
+            </summary>
+        </member>
+        <member name="T:NUnit.Core.Extensions.NSpecifySuiteExtension">
+            <summary>
+            NSpecifySuiteExtension extends test suite and creates a fixture that runs every specification implementing the NSpecify attributes.
+            Because it inherits from TestSuite, rather than TestFixture, it has to construct its own fixture object and find its 
+            own specifications. Everything is done in the constructor for simplicity.
+            </summary>
+        </member>
+        <member name="M:NUnit.Core.Extensions.NSpecifySuiteExtension.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NUnit.Core.Extensions.NSpecifySuiteExtension"/> class.
+            </summary>
+            <param name="fixtureType">Type of the fixture.</param>
+        </member>
+    </members>
+</doc>
