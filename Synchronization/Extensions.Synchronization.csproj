@@ -37,8 +37,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\Strategies\MethodSynchronizationStrategy.cs" />
@@ -47,6 +45,12 @@
     <Compile Include="SynchronizationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SynchronizeAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Core.csproj">
+      <Project>{2B1E6AB3-720A-4A47-9AC8-20D392BD6747}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\Directives\" />
