@@ -24,7 +24,13 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Ninject.Core;
+using Ninject.Core.Binding;
+using Ninject.Core.Infrastructure;
+using Ninject.Core.Injection;
+using Ninject.Core.Planning;
 using Ninject.Core.Planning.Strategies;
+using Ninject.Extensions.Synchronization.Infrastructure.Directives;
 
 #endregion
 
@@ -39,6 +45,56 @@ namespace Ninject.Extensions.Synchronization.Infrastructure.Strategies
                                                       BindingFlags.NonPublic |
                                                       BindingFlags.Instance |
                                                       BindingFlags.DeclaredOnly;
+
+        /// <summary>
+        /// Executed to build the activation plan.
+        /// </summary>
+        /// <param name="binding">The binding that points at the type whose activation plan is being released.</param>
+        /// <param name="type">The type whose activation plan is being manipulated.</param>
+        /// <param name="plan">The activation plan that is being manipulated.</param>
+        /// <returns>A value indicating whether to proceed or interrupt the strategy chain.</returns>
+        public override StrategyResult Build(IBinding binding, Type type, IActivationPlan plan)
+        {
+            ICollection<MethodInfo> candidates = GetCandidateMethods(type);
+
+            foreach (MethodInfo method in candidates)
+            {
+                SynchronizeAttribute[] attributes = method.GetAllAttributes<SynchronizeAttribute>();
+
+                if (attributes.Length > 0)
+                {
+                    RegisterMethodInterceptors(binding, type, plan, method, attributes);
+                    var injectorFactory = Kernel.Components.Get<IInjectorFactory>();
+                    foreach (SynchronizeAttribute attribute in attributes)
+                    {
+                        if (!plan.Directives.HasOneOrMore<SynchronizationDirective>())
+                        {
+                            // I don't actually think I need this injector.
+                            IMethodInjector injector = injectorFactory.GetInjector(method);
+                            plan.Directives.Add(new SynchronizationDirective(attribute.SynchronizationContext, injector));
+                        }
+                    }
+                }
+            }
+
+            return StrategyResult.Proceed;
+        }
+
+
+        /// <summary>
+        /// Registers static interceptors defined by attributes on the class for all candidate
+        /// methods on the class, execept those decorated with a <see cref="DoNotInterceptAttribute"/>.
+        /// </summary>
+        /// <param name="binding">The binding that points at the type whose activation plan is being released.</param>
+        /// <param name="type">The type whose activation plan is being manipulated.</param>
+        /// <param name="plan">The activation plan that is being manipulated.</param>
+        /// <param name="candidates">The candidate methods to intercept.</param>
+        protected virtual void RegisterClassInterceptors(IBinding binding, Type type, IActivationPlan plan,
+                                                         ICollection<MethodInfo> candidates)
+        {
+            // This is taken care of by the GetCandidateMethods. We don't want to support static interceptors.
+            // This call should be compiled out into a NOP.
+        }
 
         /// <summary>
         /// Gets a collection of methods that may be intercepted on the specified type.
