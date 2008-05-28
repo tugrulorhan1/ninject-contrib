@@ -22,6 +22,7 @@
 #region Using Directives
 
 using System;
+using System.Threading;
 using Ninject.Core;
 using Ninject.Core.Interception;
 using Ninject.Extensions.Synchronization.Infrastructure;
@@ -36,6 +37,26 @@ namespace Ninject.Extensions.Synchronization
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
     public class SynchronizeAttribute : InterceptAttribute
     {
+        private SynchronizationContext _synchronizationContext;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SynchronizeAttribute"/> class.
+        /// </summary>
+        public SynchronizeAttribute()
+        {
+            SynchronizationContext = CustomSyncContext.Instance;
+        }
+
+        /// <summary>
+        /// Gets or sets the synchronization context.
+        /// </summary>
+        /// <value>The synchronization context.</value>
+        public SynchronizationContext SynchronizationContext
+        {
+            get { return _synchronizationContext; }
+            set { _synchronizationContext = value; }
+        }
+
         /// <summary>
         /// Creates the interceptor associated with the attribute.
         /// </summary>
@@ -45,5 +66,30 @@ namespace Ninject.Extensions.Synchronization
         {
             return request.Kernel.Get<SynchronizationInterceptor>();
         }
+
+        #region Nested type: CustomSyncContext
+
+        /// <summary>
+        /// Dummy context for early testing.
+        /// </summary>
+        private class CustomSyncContext : SynchronizationContext
+        {
+            private static readonly SynchronizationContext _instance = new CustomSyncContext();
+
+            private CustomSyncContext()
+            {
+            }
+
+            /// <summary>
+            /// Gets the instance.
+            /// </summary>
+            /// <value>The instance.</value>
+            public static SynchronizationContext Instance
+            {
+                get { return _instance; }
+            }
+        }
+
+        #endregion
     }
 }

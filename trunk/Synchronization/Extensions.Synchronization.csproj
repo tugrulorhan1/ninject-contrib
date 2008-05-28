@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\Strategies\MethodSynchronizationStrategy.cs" />
+    <Compile Include="Infrastructure\Directives\SynchronizationDirective.cs" />
     <Compile Include="Infrastructure\SynchroninzationInterceptor.cs" />
     <Compile Include="Infrastructure\SynchronizationExtension.cs" />
     <Compile Include="SynchronizationModule.cs" />
@@ -53,7 +54,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Infrastructure\Directives\" />
     <Folder Include="Infrastructure\Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
