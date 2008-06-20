@@ -34,7 +34,7 @@ namespace Ninject.Framework.PresentationFoundation.Infrastructure
             foreach (var evt in events)
             {
                 var ensureAction = false;
-                var attributes = AttributeReader.GetAll<PublishActionAttribute>(evt);
+                var attributes = evt.GetAllAttributes<PublishActionAttribute>();
                 foreach (var attribute in attributes)
                 {
                     if (ensureAction)
@@ -55,7 +55,7 @@ namespace Ninject.Framework.PresentationFoundation.Infrastructure
             var methods = type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             foreach (var method in methods)
             {
-                var attributes = AttributeReader.GetAll<SubscribeToActionAttribute>(method);
+                var attributes = method.GetAllAttributes<SubscribeToActionAttribute>();
                 foreach (var attribute in attributes)
                 {
                     var channel = attribute.ChannelName();
@@ -93,7 +93,7 @@ namespace Ninject.Framework.PresentationFoundation.Infrastructure
         /// </returns>
         private SubscriptionDirective CreateSubscriptionDirective(string channel, MethodInfo method)
         {
-            var injectorFactory = Kernel.GetComponent<IInjectorFactory>() as WpfDynamicInjectorFactory;
+            var injectorFactory = Kernel.Components.Get<IInjectorFactory>() as WpfDynamicInjectorFactory;
 
             if(injectorFactory == null)
                 throw new NullReferenceException("Have you initialized the WpfModule because the customized InjectorFactory is missing.");

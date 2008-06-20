@@ -16,8 +16,8 @@ namespace Ninject.Framework.PresentationFoundation
         /// </summary>
         public override void BeforeLoad()
         {
-            Kernel.Connect<IMessageBroker>(new WpfMessageBroker());
-            Kernel.Connect<IInjectorFactory>(new WpfDynamicInjectorFactory());
+            Kernel.Components.Connect<IMessageBroker>(new WpfMessageBroker());
+            Kernel.Components.Connect<IInjectorFactory>(new WpfDynamicInjectorFactory());
         }
 
         /// <summary>

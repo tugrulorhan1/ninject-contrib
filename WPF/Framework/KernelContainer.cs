@@ -56,7 +56,7 @@ namespace Ninject.Framework.PresentationFoundation
         {
             Inject(view);
 
-            var presentedBy = AttributeReader.GetOne<PresentedByAttribute>(view.GetType());
+            var presentedBy = view.GetType().GetOneAttribute<PresentedByAttribute>();
 
             if (presentedBy == null) throw new InvalidOperationException("Did you specify a PresentedBy attribute on this view?");
             var presenterType = presentedBy.PresenterType;
