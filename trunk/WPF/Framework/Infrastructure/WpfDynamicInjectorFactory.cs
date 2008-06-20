@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Ninject.Core.Infrastructure;
 using Ninject.Core.Injection;
@@ -29,7 +30,8 @@ namespace Ninject.Framework.PresentationFoundation.Infrastructure
         /// <returns>A new injector for the View action.</returns>
         public IMethodInjector GetViewActionInjector(MethodInfo viewAction)
         {
-            Guard.Against(viewAction.IsGenericMethodDefinition, "Cannot create injector from generic type definition.");
+            if(viewAction.IsGenericMethodDefinition)
+                throw new InvalidOperationException("Cannot create injector from generic type definition.");
 
             if (_viewActionInjectors.ContainsKey(viewAction))
                 return _viewActionInjectors[viewAction];

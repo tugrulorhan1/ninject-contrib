@@ -20,10 +20,10 @@ namespace Ninject.Framework.PresentationFoundation.Infrastructure
         {
             base.OnConnected(args);
 
-            var planner = Kernel.GetComponent<IPlanner>();
+            var planner = Kernel.Components.Get<IPlanner>();
             planner.Strategies.Append(new WpfEventReflectionStrategy());
 
-            var activator = Kernel.GetComponent<IActivator>();
+            var activator = Kernel.Components.Get<IActivator>();
             activator.Strategies.Append(new EventBindingStrategy());
         }
 
@@ -33,10 +33,10 @@ namespace Ninject.Framework.PresentationFoundation.Infrastructure
         /// <param name="args">The event arguments.</param>
         protected override void OnDisconnected(EventArgs args)
         {
-            var planner = Kernel.GetComponent<IPlanner>();
+            var planner = Kernel.Components.Get<IPlanner>();
             planner.Strategies.RemoveAll<WpfEventReflectionStrategy>();
 
-            var activator = Kernel.GetComponent<IActivator>();
+            var activator = Kernel.Components.Get<IActivator>();
             activator.Strategies.RemoveAll<EventBindingStrategy>();
 
             base.OnDisconnected(args);
