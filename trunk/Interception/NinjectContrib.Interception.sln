@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjectContrib.Interception", "NinjectContrib.Interception\NinjectContrib.Interception.csproj", "{4D6C18A6-6EC7-40C8-A35F-4D1EF95A7CE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjectContrib.Interception.Tests", "NinjectContrib.Interception.Tests\NinjectContrib.Interception.Tests.csproj", "{9FF82AF2-0071-4DBD-8BB7-00C5E0FCC6E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{4D6C18A6-6EC7-40C8-A35F-4D1EF95A7CE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D6C18A6-6EC7-40C8-A35F-4D1EF95A7CE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D6C18A6-6EC7-40C8-A35F-4D1EF95A7CE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FF82AF2-0071-4DBD-8BB7-00C5E0FCC6E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FF82AF2-0071-4DBD-8BB7-00C5E0FCC6E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FF82AF2-0071-4DBD-8BB7-00C5E0FCC6E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FF82AF2-0071-4DBD-8BB7-00C5E0FCC6E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
