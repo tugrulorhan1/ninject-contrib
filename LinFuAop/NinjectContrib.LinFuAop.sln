@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjectContrib.LinFuAop", "NinjectContrib.LinFuAop\NinjectContrib.LinFuAop.csproj", "{70943B3E-30F0-4123-889E-ABEED653917B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjectContrib.LinFuAop.Tests", "NinjectContrib.LinFuAop.Tests\NinjectContrib.LinFuAop.Tests.csproj", "{4120301E-F694-4032-8FC4-093816217BD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjectContrib.LinFuAop.Tests.PostwovenAssembly", "NinjectContrib.LinFuAop.Tests.PostwovenAssembly\NinjectContrib.LinFuAop.Tests.PostwovenAssembly.csproj", "{C705AE25-5957-419E-97BC-76C5120254A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70943B3E-30F0-4123-889E-ABEED653917B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70943B3E-30F0-4123-889E-ABEED653917B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70943B3E-30F0-4123-889E-ABEED653917B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70943B3E-30F0-4123-889E-ABEED653917B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4120301E-F694-4032-8FC4-093816217BD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4120301E-F694-4032-8FC4-093816217BD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4120301E-F694-4032-8FC4-093816217BD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4120301E-F694-4032-8FC4-093816217BD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C705AE25-5957-419E-97BC-76C5120254A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C705AE25-5957-419E-97BC-76C5120254A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C705AE25-5957-419E-97BC-76C5120254A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C705AE25-5957-419E-97BC-76C5120254A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
