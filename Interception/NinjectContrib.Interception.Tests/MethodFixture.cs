@@ -22,7 +22,8 @@ namespace NinjectContrib.Interception.Tests
             }
 
             var testModule = new InlineModule(
-                m => m.InterceptReplace<MockObject>(o => o.GetMyProperty(), i => i.ReturnValue = "intercepted")
+                m => m.InterceptReplace<MockObject>(o => o.GetMyProperty(),
+                    i => i.ReturnValue = "intercepted")
             );
 
             using (var kernel = new StandardKernel(new LinFuModule(), new MethodInterceptorModule(), new MockModule(), testModule))
@@ -41,7 +42,8 @@ namespace NinjectContrib.Interception.Tests
             var testString = "empty";
             
             var testModule = new InlineModule(
-                m => m.InterceptBefore<MockObject>(o => o.SetMyProperty(""), i => testString = ((MockObject)i.Request.Target).MyProperty)
+                m => m.InterceptBefore<MockObject>(o => o.SetMyProperty(""),
+                    i => testString = ((MockObject)i.Request.Target).MyProperty)
             );
 
             using (var kernel = new StandardKernel(new LinFuModule(), new MethodInterceptorModule(), new MockModule(), testModule))
@@ -65,7 +67,8 @@ namespace NinjectContrib.Interception.Tests
             var testString = "empty";
             
             var testModule = new InlineModule(
-                m => m.InterceptAfter<MockObject>(o => o.SetMyProperty(""), i => testString = ((MockObject)i.Request.Target).MyProperty)
+                m => m.InterceptAfter<MockObject>(o => o.SetMyProperty(""),
+                    i => testString = ((MockObject)i.Request.Target).MyProperty)
             );
 
             using (var kernel = new StandardKernel(new LinFuModule(), new MethodInterceptorModule(), new MockModule(), testModule))
