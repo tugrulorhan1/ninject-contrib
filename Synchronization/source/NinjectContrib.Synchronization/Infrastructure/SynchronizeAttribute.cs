@@ -44,7 +44,7 @@ namespace NinjectContrib.Synchronization.Infrastructure
         {
             SynchronizationProxyType = synchronizationProxyType;
             Order = 0;
-            SynchronizationContext = ContextScope.GetCurrentContext();
+            //SynchronizationContext = ContextScope.CurrentContext;
             ContextType = null;
         }
 

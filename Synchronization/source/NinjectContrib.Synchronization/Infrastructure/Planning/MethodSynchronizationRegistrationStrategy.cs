@@ -42,15 +42,15 @@ using NinjectContrib.Synchronization.Infrastructure.Planning.Directives;
 
 namespace NinjectContrib.Synchronization.Infrastructure.Planning
 {
-    public class MethodSynchronizationRegistrationStrategy : InterceptorRegistrationStrategy
+    internal class MethodSynchronizationRegistrationStrategy : InterceptorRegistrationStrategy
     {
-        private readonly SynchronizationMetaDataStore _synchronizationStore;
+        private SynchronizationMetaDataStore _synchronizationStore;
 
-        public MethodSynchronizationRegistrationStrategy()
+        protected override void OnConnected(EventArgs args)
         {
-            _synchronizationStore = new SynchronizationMetaDataStore();
+            _synchronizationStore = new SynchronizationMetaDataStore(Kernel);
+            base.OnConnected(args);
         }
-
         /// <summary>
         /// Executed to build the activation plan.         
         /// </summary>
@@ -69,8 +69,6 @@ namespace NinjectContrib.Synchronization.Infrastructure.Planning
 
             // From here below is the same as the base, but with a different attribute type.
             IEnumerable<KeyValuePair<MethodInfo, SynchronizeAttribute>> candidates = GetCandidateMethodData( type );
-
-            //RegisterClassInterceptors(binding, type, plan, candidates);
 
             foreach ( KeyValuePair<MethodInfo, SynchronizeAttribute> candidate in candidates )
             {
@@ -118,7 +116,7 @@ namespace NinjectContrib.Synchronization.Infrastructure.Planning
             {
                 IAdvice advice = factory.Create( method );
 
-                advice.Callback = CreateInterceptor; //attribute.CreateInterceptor;
+                advice.Callback = CreateInterceptor;
                 advice.Order = attribute.Order;
 
                 registry.Register( advice );
@@ -130,28 +128,29 @@ namespace NinjectContrib.Synchronization.Infrastructure.Planning
             Ensure.ArgumentNotNull( request, "request" );
 
             SynchronizeAttribute attribute =
-                _synchronizationStore[request.Target.GetType()].GetSynchronizationAttributeForMethod( request.Method );
+                _synchronizationStore[request.Target.GetType()][request.Method];
+            
+            return new StandardSynchronizationInterceptor( attribute );
+            //switch ( attribute.SynchronizationProxyType )
+            //{
+            //    case SynchronizationProxyType.ISynchronizeInvoke:
+            //    {
+            //        if ( typeof (ISynchronizeInvoke).IsAssignableFrom( request.Context.Implementation ) )
+            //        {
+            //            return new SynchronizeInvokeInterceptor();
+            //        }
 
-            switch ( attribute.SynchronizationProxyType )
-            {
-                case SynchronizationProxyType.ISynchronizeInvoke:
-                {
-                    if ( typeof (ISynchronizeInvoke).IsAssignableFrom( request.Context.Implementation ) )
-                    {
-                        return new SynchronizeInvokeInterceptor();
-                    }
-
-                    throw new InvalidOperationException(
-                        "ISynchronizeInvoke interception can only be used on types that implement ISynchronizeInvoke." );
-                }
-                case SynchronizationProxyType.SynchronizationContext:
-                    attribute.SynchronizationContext =
-                        request.Kernel.Get( attribute.ContextType ) as SynchronizationContext;
-                    return new SynchronizationContextInterceptor( attribute );
-                default:
-                    throw new InvalidOperationException(
-                        "Attribute SynchronizationProxyType but be set prior to interceptor creation." );
-            }
+            //        throw new InvalidOperationException(
+            //            "ISynchronizeInvoke interception can only be used on types that implement ISynchronizeInvoke." );
+            //    }
+            //    case SynchronizationProxyType.SynchronizationContext:
+            //        attribute.SynchronizationContext =
+            //            request.Kernel.Get( attribute.ContextType ) as SynchronizationContext;
+            //        return new SynchronizationContextInterceptor( attribute );
+            //    default:
+            //        throw new InvalidOperationException(
+            //            "Attribute SynchronizationProxyType but be set prior to interceptor creation." );
+            //}
         }
 
         #region Bingind Behavior Manipulation

@@ -54,7 +54,7 @@ namespace NinjectContrib.Synchronization.Infrastructure
         protected override void OnConnected( EventArgs args )
         {
             Kernel.Components.Get<IPlanner>().Strategies.Append( new MethodSynchronizationRegistrationStrategy() );
-            Kernel.Components.Get<IActivator>().Strategies.Append( new SynchronizationActivator() );
+            Kernel.Components.Get<IActivator>().Strategies.Append( new SynchronizationActivationStrategy() );
 
             base.OnConnected( args );
         }
@@ -66,7 +66,7 @@ namespace NinjectContrib.Synchronization.Infrastructure
         protected override void OnDisconnected( EventArgs args )
         {
             Kernel.Components.Get<IPlanner>().Strategies.RemoveAll<MethodSynchronizationRegistrationStrategy>();
-            Kernel.Components.Get<IActivator>().Strategies.RemoveAll<SynchronizationActivator>();
+            Kernel.Components.Get<IActivator>().Strategies.RemoveAll<SynchronizationActivationStrategy>();
 
             base.OnDisconnected( args );
         }

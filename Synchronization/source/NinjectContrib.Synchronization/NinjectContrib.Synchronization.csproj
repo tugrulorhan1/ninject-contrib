@@ -68,8 +68,9 @@
   <ItemGroup>
     <Compile Include="Infrastructure\Behavior\BehaviorContextDecorator.cs" />
     <Compile Include="Extensions\AttributeExtension.cs" />
-    <Compile Include="Infrastructure\Activation\SynchronizationActivator.cs" />
+    <Compile Include="Infrastructure\Activation\SynchronizationActivationStrategy.cs" />
     <Compile Include="Infrastructure\ContextScope.cs" />
+    <Compile Include="Infrastructure\Interception\StandardSynchronizationInterceptor.cs" />
     <Compile Include="Infrastructure\Interception\SynchronizationInterceptorBase.cs" />
     <Compile Include="Infrastructure\MarshallingControl.cs">
       <SubType>Component</SubType>
@@ -81,13 +82,11 @@
     <Compile Include="Infrastructure\SynchronizationMetaDataStore.cs" />
     <Compile Include="Infrastructure\SynchronizeAttribute.cs" />
     <Compile Include="Infrastructure\SynchronizationExtension.cs" />
-    <Compile Include="Infrastructure\Interception\SynchronizeInvokeInterceptor.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Interception\SynchronizationContextInterceptor.cs" />
     <Compile Include="SynchronizationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

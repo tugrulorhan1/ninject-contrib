@@ -27,6 +27,9 @@ using Ninject.Core.Planning.Directives;
 
 namespace NinjectContrib.Synchronization.Infrastructure.Planning.Directives
 {
+    /// <summary>
+    /// Used to identify the need for synchronization in the activation process.
+    /// </summary>
     internal class SynchronizationDirective : DirectiveBase
     {
         /// <summary>

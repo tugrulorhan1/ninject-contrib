@@ -61,6 +61,15 @@ namespace NinjectContrib.Synchronization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Target must implement ISynchronizeInvoke..
+        /// </summary>
+        internal static string ISyncInvokeMismatchError {
+            get {
+                return ResourceManager.GetString("ISyncInvokeMismatchError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The {0} requires that an implementation of {1} be registered as a kernel component prior to the {1} being loaded..
         /// </summary>
         internal static string ModuleActivationErrorMessage01 {

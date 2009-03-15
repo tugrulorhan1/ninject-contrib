@@ -57,7 +57,9 @@ namespace NinjectContrib.Synchronization
             // The WindowsFormsSynchronizationContext should have been created by the auto install of the marshalling control.
             SynchronizationContext current = SynchronizationContext.Current;
             Trace.Assert( current != null );
-            Bind<WindowsFormsSynchronizationContext>().ToProvider( new WinFormsContextProvider() );
+            
+            Bind<WindowsFormsSynchronizationContext>().ToSelf().Using( new SingletonBehavior() );
+            Kernel.Inject(WindowsFormsSynchronizationContext.Current, new StandardContext( Kernel, typeof(WindowsFormsSynchronizationContext), Kernel.Components.Tracker.GetScope( Kernel ) ));
             Bind<SynchronizationContext>().ToSelf().Using( new OnePerThreadBehavior() );
         }
 
@@ -67,6 +69,8 @@ namespace NinjectContrib.Synchronization
 
         private class WinFormsContextProvider : IProvider
         {
+            private static readonly SynchronizationContext _syncContext = WindowsFormsSynchronizationContext.Current;
+
             #region Implementation of IProvider
 
             /// <summary>
@@ -102,7 +106,7 @@ namespace NinjectContrib.Synchronization
             /// </returns>
             public object Create( IContext context )
             {
-                return SynchronizationContext.Current;
+                return _syncContext;
             }
 
             /// <summary>

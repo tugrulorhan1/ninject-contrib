@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using System.Threading;
 using Ninject.Core;
 using Ninject.Core.Infrastructure;
 using NinjectContrib.Synchronization.Extensions;
@@ -35,6 +36,8 @@ namespace NinjectContrib.Synchronization.Infrastructure
 {
     internal class SynchronizationMetaDataStore
     {
+        private IKernel Kernel { get; set; }
+
         private const BindingFlags _bindingFlags = BindingFlags.Public |
                                                    BindingFlags.NonPublic |
                                                    BindingFlags.Instance |
@@ -43,13 +46,15 @@ namespace NinjectContrib.Synchronization.Infrastructure
         private readonly IDictionary<Type, SynchronizationMetaData> _classMetaDataLookupTable;
         private readonly IDictionary<Type, SynchronizationMetaData> _compositeMetaDataLookupTable;
 
-        public SynchronizationMetaDataStore()
-            : this( true )
-        {
+        public SynchronizationMetaDataStore(IKernel kernel)
+            : this( kernel, true )
+        {            
         }
 
-        public SynchronizationMetaDataStore( bool useImplicitSynchronization )
+        public SynchronizationMetaDataStore( IKernel kernel, bool useImplicitSynchronization )
         {
+            Ensure.ArgumentNotNull( kernel, "kernel" );
+            Kernel = kernel;
             UseImplicitSynchronization = useImplicitSynchronization;
             _classMetaDataLookupTable = new Dictionary<Type, SynchronizationMetaData>();
             _compositeMetaDataLookupTable = new Dictionary<Type, SynchronizationMetaData>();
@@ -112,6 +117,7 @@ namespace NinjectContrib.Synchronization.Infrastructure
         private void BuildMethodMetaData( Type type )
         {
             SynchronizationMetaData metaData = _classMetaDataLookupTable[type];
+            SetSyncContext( metaData.DefaultAttribute );
 
             MethodInfo[] methods = type.GetMethods( _bindingFlags );
             foreach ( MethodInfo method in methods )
@@ -144,6 +150,7 @@ namespace NinjectContrib.Synchronization.Infrastructure
         private SynchronizationMetaData BuildHierarchichalSynchronizationMetaData( Type type )
         {
             var metaData = _classMetaDataLookupTable[type].Clone() as SynchronizationMetaData;
+            SetSyncContext( metaData.DefaultAttribute );
             MergeSynchronizationMetaData( metaData, type.BaseType );
             _compositeMetaDataLookupTable.Add( type, metaData );
             return metaData;
@@ -159,12 +166,29 @@ namespace NinjectContrib.Synchronization.Infrastructure
                 _classMetaDataLookupTable[type].MethodSynchronizationData;
             foreach ( KeyValuePair<MethodInfo, SynchronizeAttribute> keyValuePair in methodSynchronizationData )
             {
-                metaData.Add( keyValuePair.Key, keyValuePair.Value ?? metaData.DefaultAttribute );
+                SynchronizeAttribute attribute = keyValuePair.Value ?? metaData.DefaultAttribute;
+                SetSyncContext( attribute );
+                metaData.Add( keyValuePair.Key, attribute );
             }
 
             if ( type != typeof (object) )
             {
                 MergeSynchronizationMetaData( metaData, type.BaseType );
+            }
+        }
+
+        private void SetSyncContext(SynchronizeAttribute candidate)
+        {
+            if (candidate != null)
+                if(candidate.ContextType != null && candidate.SynchronizationContext == null)
+            {
+                candidate.SynchronizationContext =
+                    Kernel.Get(candidate.ContextType) as SynchronizationContext;
+                Debug.Assert(candidate.SynchronizationContext != null);
+            }else if(candidate.ContextType == null)
+            {
+                candidate.SynchronizationContext = Kernel.Get<SynchronizationContext>();
+                Debug.Assert(candidate.SynchronizationContext != null);
             }
         }
     }

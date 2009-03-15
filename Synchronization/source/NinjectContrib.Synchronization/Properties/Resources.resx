@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ISyncInvokeMismatchError" xml:space="preserve">
+    <value>Target must implement ISynchronizeInvoke.</value>
+  </data>
   <data name="ModuleActivationErrorMessage01" xml:space="preserve">
     <value>The {0} requires that an implementation of {1} be registered as a kernel component prior to the {1} being loaded.</value>
   </data>

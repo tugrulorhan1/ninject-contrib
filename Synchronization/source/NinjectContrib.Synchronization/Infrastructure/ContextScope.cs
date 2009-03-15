@@ -32,44 +32,59 @@ namespace NinjectContrib.Synchronization.Infrastructure
 {
     internal class ContextScope : IDisposable
     {
+        private IKernel _kernel;
+
         public ContextScope( SynchronizationContext target, IKernel kernel )
         {
-            OriginalContext = SetCreationContext( target, kernel );
+            _kernel = kernel;
+            OriginalContext = SetCreationContext( target );
         }
 
         private SynchronizationContext OriginalContext { get; set; }
 
-        public static SynchronizationContext GetCurrentContext()
+        /// <summary>
+        /// Gets the current <see cref="SynchronizationContext"/>. If there is no current context, a new context
+        /// will be created and set.
+        /// </summary>
+        /// <returns>The current <see cref="SynchronizationContext"/>.</returns>
+        public static SynchronizationContext GetCurrentContext(IKernel kernel)
         {
-            if ( SynchronizationContext.Current == null )
-            {
-                SynchronizationContext.SetSynchronizationContext( new SynchronizationContext() );
-            }
-            Debug.Assert( SynchronizationContext.Current != null );
-            return SynchronizationContext.Current;
+            
+                if ( SynchronizationContext.Current == null )
+                {
+                    SynchronizationContext.SetSynchronizationContext( kernel.Get<SynchronizationContext>() );
+                }
+                Debug.Assert( SynchronizationContext.Current != null );
+                return SynchronizationContext.Current;
+            
         }
 
-        public static void RestoreCreationContext( SynchronizationContext original )
+        /// <summary>
+        /// Restores the current context to that of the target if the current context is different than that of the target.
+        /// </summary>
+        /// <param name="target">The context desired to be current.</param>
+        public void RestoreCreationContext( SynchronizationContext target )
         {
-            if ( SynchronizationContext.Current != original )
+            if ( GetCurrentContext(_kernel) != target)
             {
-                SynchronizationContext.SetSynchronizationContext( original );
+                SynchronizationContext.SetSynchronizationContext( target );
             }
         }
 
-        public static SynchronizationContext SetCreationContext( SynchronizationContext target, IKernel kernel )
+        /// <summary>
+        /// Sets the current <see cref="SynchronizationContext"/> to the target <see cref="SynchronizationContext"/> 
+        /// and returns the <see cref="SynchronizationContext"/> that was active prior to the switch.
+        /// </summary>
+        /// <param name="target">The context desired to be current.</param>
+        /// <returns>The <see cref="SynchronizationContext"/> that was active prior to the target being set.</returns>
+        public SynchronizationContext SetCreationContext( SynchronizationContext target )
         {
-            // First, if there is no context, create one.
-            SynchronizationContext original = SynchronizationContext.Current;
-            if ( original == null )
-            {
-                SynchronizationContext.SetSynchronizationContext( kernel.Get<SynchronizationContext>() );
-                original = SynchronizationContext.Current;
-            }
+            // Get the current context, creating it if needed.
+            SynchronizationContext original = GetCurrentContext(_kernel);
 
-            Debug.Assert( original != null );
+            bool hashesEqual = target.GetHashCode() == original.GetHashCode();
+            Console.WriteLine("Target: {0}\tOriginal: {1}", target.GetHashCode(), original.GetHashCode());
 
-            // Now that there is a context, see if we need to change contexts.
             if ( target != original )
             {
                 SynchronizationContext.SetSynchronizationContext( target );
@@ -87,6 +102,7 @@ namespace NinjectContrib.Synchronization.Infrastructure
         void IDisposable.Dispose()
         {
             RestoreCreationContext( OriginalContext );
+            _kernel = null;
             GC.SuppressFinalize( this );
         }
 
