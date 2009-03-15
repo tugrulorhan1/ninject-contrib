@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjectContrib.Synchronization", "..\source\NinjectContrib.Synchronization\NinjectContrib.Synchronization.csproj", "{71233C88-69B6-4997-BAA1-093471514399}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjectContrib.Synchronization.Tests", "..\source\NinjectContrib.Synchronization.Tests\NinjectContrib.Synchronization.Tests.csproj", "{4E2DDF80-1422-4833-B9B0-E3BD265CE019}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Analysis|Any CPU = Analysis|Any CPU
@@ -16,6 +18,12 @@ Global
 		{71233C88-69B6-4997-BAA1-093471514399}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71233C88-69B6-4997-BAA1-093471514399}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71233C88-69B6-4997-BAA1-093471514399}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E2DDF80-1422-4833-B9B0-E3BD265CE019}.Analysis|Any CPU.ActiveCfg = Analysis|Any CPU
+		{4E2DDF80-1422-4833-B9B0-E3BD265CE019}.Analysis|Any CPU.Build.0 = Analysis|Any CPU
+		{4E2DDF80-1422-4833-B9B0-E3BD265CE019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E2DDF80-1422-4833-B9B0-E3BD265CE019}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E2DDF80-1422-4833-B9B0-E3BD265CE019}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E2DDF80-1422-4833-B9B0-E3BD265CE019}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

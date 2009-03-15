@@ -31,17 +31,27 @@ using Ninject.Core.Infrastructure;
 
 namespace NinjectContrib.Synchronization.Infrastructure.Behavior
 {
+    /// <summary>
+    /// Wraps the default behavior using in object activation. To all callers it is the same object,
+    /// but the Resolve and Release members change the creation context befor sending the base behavior
+    /// on its way.
+    /// </summary>
     [SuppressMessage( "Microsoft.Design", "CA1063:ImplementIDisposableCorrectly" )]
-    public class BehaviorContextDecorator : IBehavior
+    internal class BehaviorContextDecorator : IBehavior
     {
-        private readonly IBehavior _behavior;
+        private readonly IBehavior _baseBehavior;
         private readonly SynchronizeAttribute _syncAttribute;
 
+        /// <summary>
+        /// Creates a new <see cref="BehaviorContextDecorator"/> instance.
+        /// </summary>
+        /// <param name="behavior">The base behavior to decorate.</param>
+        /// <param name="synchronizeAttribute">The creation context of the base behavior.</param>
         public BehaviorContextDecorator( IBehavior behavior, SynchronizeAttribute synchronizeAttribute )
         {
             Ensure.ArgumentNotNull( behavior, "behavior" );
-            Ensure.ArgumentNotNull( behavior, "synchronizeAttribute" );
-            _behavior = behavior;
+            Ensure.ArgumentNotNull(synchronizeAttribute, "synchronizeAttribute");
+            _baseBehavior = behavior;
             _syncAttribute = synchronizeAttribute;
         }
 
@@ -55,7 +65,7 @@ namespace NinjectContrib.Synchronization.Infrastructure.Behavior
         [SuppressMessage( "Microsoft.Design", "CA1063:ImplementIDisposableCorrectly" )]
         public void Dispose()
         {
-            _behavior.Dispose();
+            _baseBehavior.Dispose();
         }
 
         #endregion
@@ -67,8 +77,8 @@ namespace NinjectContrib.Synchronization.Infrastructure.Behavior
         /// </summary>
         public IKernel Kernel
         {
-            get { return _behavior.Kernel; }
-            set { _behavior.Kernel = value; }
+            get { return _baseBehavior.Kernel; }
+            set { _baseBehavior.Kernel = value; }
         }
 
         /// <summary>
@@ -81,7 +91,7 @@ namespace NinjectContrib.Synchronization.Infrastructure.Behavior
         /// </remarks>
         public bool SupportsEagerActivation
         {
-            get { return _behavior.SupportsEagerActivation; }
+            get { return _baseBehavior.SupportsEagerActivation; }
         }
 
         /// <summary>
@@ -95,7 +105,7 @@ namespace NinjectContrib.Synchronization.Infrastructure.Behavior
         /// </remarks>
         public bool ShouldTrackInstances
         {
-            get { return _behavior.ShouldTrackInstances; }
+            get { return _baseBehavior.ShouldTrackInstances; }
         }
 
         /// <summary>
@@ -105,9 +115,12 @@ namespace NinjectContrib.Synchronization.Infrastructure.Behavior
         /// <returns>An instance of the type associated with the behavior.</returns>
         public object Resolve( IContext context )
         {
-            using ( new ContextScope( _syncAttribute.SynchronizationContext, Kernel ) )
+            // We want to make sure that objects are created in the contex which they have stated. 
+            // For example, all controls, forms, etc will be created in the WindowsformsSychronizationContext.
+            // This ensures that all calls are made on the same context in which the object was created.
+            using (new ContextScope(_syncAttribute.SynchronizationContext, context.Kernel))
             {
-                return _behavior.Resolve( context );
+                return _baseBehavior.Resolve( context );
             }
         }
 
@@ -117,9 +130,10 @@ namespace NinjectContrib.Synchronization.Infrastructure.Behavior
         /// <param name="context">The activation context.</param>
         public void Release( IContext context )
         {
-            using ( new ContextScope( _syncAttribute.SynchronizationContext, Kernel ) )
+            // We want to restore the context during teardown of the object. This is mainly needed for controls.
+            using ( new ContextScope( _syncAttribute.SynchronizationContext, context.Kernel ) )
             {
-                _behavior.Release( context );
+                _baseBehavior.Release( context );
             }
         }
 

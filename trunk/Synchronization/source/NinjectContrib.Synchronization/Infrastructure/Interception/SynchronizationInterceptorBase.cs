@@ -21,9 +21,9 @@
 
 #region Using Directives
 
-using System;
 using Ninject.Core;
 using Ninject.Core.Interception;
+using Ninject.Core.Logging;
 
 #endregion
 
@@ -54,9 +54,18 @@ namespace NinjectContrib.Synchronization.Infrastructure.Interception
         /// <param name="invocation">The invocation that is being intercepted.</param>
         protected virtual void BeforeInvoke( IInvocation invocation )
         {
-            Console.WriteLine( "Intercepting call for: {0}::{1}",
-                               invocation.Request.Target.GetType(),
-                               invocation.Request.Method );
+            if ( !invocation.Request.Kernel.Options.GenerateDebugInfo )
+            {
+                return;
+            }
+
+            ILogger logger = invocation.Request.Kernel.Components.LoggerFactory.GetLogger( GetType() );
+            if ( logger.IsDebugEnabled )
+            {
+                logger.Debug( "Intercepting call for: {0}::{1}",
+                              invocation.Request.Target.GetType(),
+                              invocation.Request.Method );
+            }
         }
 
         /// <summary>
@@ -65,9 +74,18 @@ namespace NinjectContrib.Synchronization.Infrastructure.Interception
         /// <param name="invocation">The invocation that is being intercepted.</param>
         protected virtual void AfterInvoke( IInvocation invocation )
         {
-            Console.WriteLine( "Intercepted call for: {0}::{1}",
-                               invocation.Request.Target.GetType(),
-                               invocation.Request.Method );
+            if ( !invocation.Request.Kernel.Options.GenerateDebugInfo )
+            {
+                return;
+            }
+
+            ILogger logger = invocation.Request.Kernel.Components.LoggerFactory.GetLogger( GetType() );
+            if ( logger.IsDebugEnabled )
+            {
+                logger.Debug( "Intercepted call for: {0}::{1}",
+                              invocation.Request.Target.GetType(),
+                              invocation.Request.Method );
+            }
         }
     }
 }

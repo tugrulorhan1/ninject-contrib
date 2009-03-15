@@ -97,9 +97,12 @@ namespace NinjectContrib.Synchronization.Infrastructure
             AttributeLookupTable.Add( method, attribute );
         }
 
-        public SynchronizeAttribute GetSynchronizationAttributeForMethod( MethodInfo methodInfo )
+        public SynchronizeAttribute this[MethodInfo methodInfo]
         {
-            return AttributeLookupTable[methodInfo];
+            get
+            {
+                return AttributeLookupTable[methodInfo];
+            }
         }
 
         #region Implementation of ICloneable
