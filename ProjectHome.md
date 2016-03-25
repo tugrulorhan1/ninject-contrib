@@ -1,0 +1,1 @@
+A collection of community-created extensions and examples related to the [Ninject](http://code.google.com/p/ninject/) dependency injection project.
